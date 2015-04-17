@@ -8,7 +8,7 @@ select, textarea {
 }
 
 .well-title {
-  margin-top: 0px;
+    margin-top: 0;
 }
 .session {
     -webkit-touch-callout: none;
@@ -27,4 +27,12 @@ select, textarea {
 .votingButton {
   padding-left:6px;
   cursor:pointer;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+.blue {
+    color: #5cffc3;
 }

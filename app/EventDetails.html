@@ -3,40 +3,96 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>Event Registration</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.cs" />
-    <link rel="stylesheet" href="/css/app.cs" />
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
 </head>
-<body>
-    <div class="container">
+<body ng-cloak="">
+<div class="container">
+    <div class="navbar">
         <div class="navbar-inner">
             <ul class="nav">
 
             </ul>
         </div>
-        <div ng-controller="EventController">
-            <div class="row">
-                <div class="span11">
-                    <h2>{{event.name}}</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="span3">
-                    <div><strong>Date:</strong>{{event.date}}</div>
-                    <div><strong>Time:</strong>{{event.time}}</div>
-                </div>
+    </div>
+    <div ng-controller="EventController">
+        <img ng-src="{{event.imageUrl}}" alt="{{event.name}}"/>
+
+        <div class="row">
+            <div class="span11">
+                <h2 ng-class="myclass" ng-bind-template="{{event.name}} {{event.date}}"></h2>
             </div>
         </div>
+
+        <button class="btn" ng-disabled="buttonDisabled">Disabled</button>
+
+        <div ng-bind-html="snippet">Some Title here</div>
+        <div ng-bind-html-unsafe="snippet">Some UNSAFE Title here</div>
+
+        <!-- ng-Show and ng-hide properties -->
+        <h2 ng-show="boolValue">Show This</h2>
+
+        <h2 ng-hide="boolValue">Hide This</h2>
+
+        <div class="row">
+            <div class="span3">
+                <div><strong>Date:</strong>{{event.date}}</div>
+                <div><strong>Time:</strong>{{event.time}}</div>
+            </div>
+            <div class="span4">
+                <address>
+                    <strong>Address:</strong><br/>
+                    {{event.location.address}} <br/>
+                    {{event.location.city}}, {{event.location.province}}
+                </address>
+            </div>
+        </div>
+
+        <br/>
+
+        <ul class="thumbnails">
+            <li ng-repeat="session in event.sessions">
+                <div class="row session">
+                    <!-- Add the voting widget here-->
+                    <div class="span0 well votingWidget">
+                        <div class="votingButton" ng-click="upVoteSession(session)">
+                            <i class="icon-chevron-up icon-white"></i>
+                        </div>
+                        <div class="badge badge-inverse">
+                            <div>{{session.upVoteCount}}</div>
+                        </div>
+                        <div class="votingButton" ng-click="downVoteSession(session)">
+                            <i class="icon-chevron-down"></i>
+                        </div>
+                    </div>
+
+                    <!-- The actual description-->
+                    <div class="well span9">
+                        <h4 class="well-title">{{session.name}}</h4>
+                        <h6 style="margin-top:-10px">{{session.creator}}</h6>
+                        <span>Duration: {{session.duration}}</span><br/>
+                        <span>Level: {{session.level}}</span><br/>
+
+                        <p>{{session.abstract}}</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
     </div>
-    <!-- These are essential imports -->
-    <script src="lib/angular/angular.js"></script>
-    <script src="js/app.js"></script>
+</div>
+<!-- These are essential imports -->
+<script src="lib/angular/angular.js"></script>
+<script src="js/app.js"></script>
 
-    <!-- These are just in case imports -->
-    <script src="lib/jquery.min.js"></script>
-    <script src="lib/underscore-1.4.4.min.js"></script>
-    <script src="lib/bootstrap.min.js"></script>
+<!-- These are just in case imports -->
+<script src="lib/jquery.min.js"></script>
+<script src="lib/underscore-1.4.4.min.js"></script>
+<script src="lib/bootstrap.min.js"></script>
 
-    <!-- Hook the event controller -->
-    <script src="js/controllers/EventController.js" ></script>
+<!-- Hook the event controller -->
+<script src="js/controllers/EventController.js"></script>
+
+<!-- for ngBindHtml-->
+<script src="lib/angular/angular-sanitize.js"></script>
 </body>
 </html>
