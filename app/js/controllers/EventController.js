@@ -7,6 +7,7 @@ eventsApp.controller('EventController',
         $scope.mystyle = {color: 'red'};
         $scope.myclass = "blue";
         $scope.buttonDisabled = true;
+        $scope.sortOrder = '-upVoteCount'; // use upVoteCount field as default sort order. minus means descending
         // event exists within the 'scope' of EventController
         $scope.event = {
             name: 'Angular Boot Camp',
@@ -20,7 +21,7 @@ eventsApp.controller('EventController',
             imageUrl: '/img/angularjs-image.jpg',
             sessions: [
                 {
-                    name: 'Directives Masterclass',
+                    name: 'Directives Masterclass Introductory',
                     creator: 'Ashish Karki',
                     duration: '1 hour',
                     level: 'Advanced',

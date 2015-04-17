@@ -20,7 +20,7 @@
 
         <div class="row">
             <div class="span11">
-                <h2 ng-class="myclass" ng-bind-template="{{event.name}} {{event.date}}"></h2>
+                <h2>{{ event.name | uppercase }}</h2>
             </div>
         </div>
 
@@ -50,8 +50,29 @@
 
         <br/>
 
+        <!-- Here we are experimenting with the type of expressions we can use with angular
+        {{ 3 * 10}}
+        {{ 'hello' + 'world'}}
+        {{[1,2,3][2]}} -->
+        <br/>
+
+        <h3>Sessions</h3>
+        Order by:
+        <select ng-model="sortOrder" class="input-small">
+            <option selected value="name">Name</option>
+            <option value="-upVoteCount">Votes</option>
+        </select>
+
+        Show:
+        <select ng-model="query.level" class="input-medium"> <!-- limit query filter to search only in level field-->
+            <option selected value="">All</option>
+            <option selected value="introductory">Introductory</option>
+            <option selected value="intermediate">Intermediate</option>
+            <option selected value="advanced">Advanced</option>
+        </select>
+
         <ul class="thumbnails">
-            <li ng-repeat="session in event.sessions">
+            <li ng-repeat="session in event.sessions | orderBy:sortOrder | limitTo:2 | filter:query">
                 <div class="row session">
                     <!-- Add the voting widget here-->
                     <div class="span0 well votingWidget">
